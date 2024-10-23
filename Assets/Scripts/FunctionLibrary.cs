@@ -21,20 +21,32 @@ public static class FunctionLibrary
 
     public static Vector3 Wave(float u, float v, float t)
     {
-        return new Vector3(u, Sin(PI * (u + v + t)), v);
+        Vector3 p;
+        p.x = u;
+        p.z = v;
+        p.y = Sin(PI * (u + v + t));
+        return p;
     }
 
     public static Vector3 MultiWave(float u, float v, float t)
     {
+        Vector3 p;
+        p.x = u;
+        p.z = v;
         var y = Sin(PI * (u + t * .5f));
         y += .5f * Sin(2f * (PI * (v + t)));
         y += Sin(PI * (u + v + .25f * t));
-        return new Vector3(u, y * (1f / 2.5f), v);
+        p.y = y;
+        return p;
     }
 
     public static Vector3 Ripple(float u, float v, float t)
     {
+        Vector3 p;
+        p.x = u;
+        p.z = v;
         var d = Sqrt(u * u + v * v);
-        return new Vector3(u, Sin(PI * (4f * d - t)) / (1 + d * 10), v);
+        p.y = Sin(PI * (4f * d - t)) / (1 + d * 10);
+        return p;
     }
 }
