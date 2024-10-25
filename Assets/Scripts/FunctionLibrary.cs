@@ -9,10 +9,11 @@ public static class FunctionLibrary
     {
         Wave,
         MultiWave,
-        Ripple
+        Ripple,
+        Sphere
     }
 
-    private static Function[] functions = { Wave, MultiWave, Ripple };
+    private static Function[] functions = { Wave, MultiWave, Ripple, Sphere };
 
     public static Function GetFunction(FunctionName name)
     {
@@ -47,6 +48,16 @@ public static class FunctionLibrary
         p.z = v;
         var d = Sqrt(u * u + v * v);
         p.y = Sin(PI * (4f * d - t)) / (1 + d * 10);
+        return p;
+    }
+
+    public static Vector3 Sphere(float u, float v, float t)
+    {
+        var r = Cos(0.5f * PI * v);
+        Vector3 p;
+        p.x = r * Sin(PI * u);
+        p.y = Sin(PI * 0.5f * v);
+        p.z = r * Cos(PI * u);
         return p;
     }
 }
