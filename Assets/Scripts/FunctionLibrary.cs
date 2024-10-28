@@ -10,10 +10,11 @@ public static class FunctionLibrary
         Wave,
         MultiWave,
         Ripple,
-        Sphere
+        Sphere,
+        Torus
     }
 
-    private static Function[] functions = { Wave, MultiWave, Ripple, Sphere };
+    private static Function[] functions = { Wave, MultiWave, Ripple, Sphere, Torus };
 
     public static Function GetFunction(FunctionName name)
     {
@@ -58,6 +59,18 @@ public static class FunctionLibrary
         Vector3 p;
         p.x = s * Sin(PI * u);
         p.y = r * Sin(PI * 0.5f * v);
+        p.z = s * Cos(PI * u);
+        return p;
+    }
+
+    public static Vector3 Torus(float u, float v, float t)
+    {
+        var r1 = .75f;
+        var r2 = .25f;
+        var s = r1 + r2 * Cos(PI * v);
+        Vector3 p;
+        p.x = s * Sin(PI * u);
+        p.y = r2 * Sin(PI * v);
         p.z = s * Cos(PI * u);
         return p;
     }

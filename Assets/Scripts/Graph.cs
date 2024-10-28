@@ -9,6 +9,7 @@ public class Graph : MonoBehaviour
 
     [SerializeField] [Range(10, 100)] private int resolution = 10;
     [SerializeField] private FunctionLibrary.FunctionName function = 0;
+    [SerializeField] [Range(0, 1)] private float lerp = 0;
     private int currentResolution;
 
     private Transform[] points;
@@ -48,6 +49,7 @@ public class Graph : MonoBehaviour
         var f = FunctionLibrary.GetFunction(function);
         var step = 2f / resolution;
         var v = 0.5f * step - 1f;
+        Vector3 g;
         for (int i = 0, x = 0, z = 0; i < points.Length; i++, x++)
         {
             if (x == resolution)
@@ -58,7 +60,11 @@ public class Graph : MonoBehaviour
             }
 
             var u = (x + .5f) * step - 1f;
-            points[i].localPosition = f(u, v, time);
+            g.x = u;
+            g.y = 0f;
+            g.z = v;
+
+            points[i].localPosition = Vector3.Lerp(g, f(u, v, time), lerp);
         }
     }
 }
